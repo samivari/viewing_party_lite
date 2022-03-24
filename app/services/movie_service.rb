@@ -1,12 +1,12 @@
 class MovieService
 
-  def top_rated
+  def self.top_rated
     conn = Faraday.new(url: 'https://api.themoviedb.org') do |faraday|
-      faraday.headers["X-API-KEY"] = ENV['movie_api_key']
+      faraday.params["api_key"] = ENV['movie_api_key']
     end
 
-    response = conn.get("3/movie/top_rated?api_key=movie_api_key")
-
+    response = conn.get("3/movie/top_rated")
+  
     json = JSON.parse(response.body, symbolize_names: true)
   end
 
