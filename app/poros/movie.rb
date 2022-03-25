@@ -7,5 +7,6 @@ class Movie
     @id = result[:id]
     @title = result[:title]
     @vote_average = result[:vote_average]
+    @id = result[:id]
   end
 end
