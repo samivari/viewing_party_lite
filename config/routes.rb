@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'landing_page#index'
 
   get '/register', to: 'users#new'
+  post '/register', to: 'users#create'
   resources :users, only: %i[show create] do
     resources :discover, only: [:index]
     resources :movies, only: %i[index show] do

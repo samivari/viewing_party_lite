@@ -26,7 +26,7 @@ RSpec.describe 'User Registration' do
     click_on 'Register'
 
     expect(current_path).to eq("/register")
-    expect(page).to have_content(flash[:alert] = "Please enter a valid username/email and ensure passwords are matching")
+    expect(page).to have_content("Please enter a valid username/email and ensure passwords are matching")
   end
 
   it 'wont register a user with non matching passwords ' do
@@ -39,6 +39,6 @@ RSpec.describe 'User Registration' do
 
     click_on 'Register'
 
-    expect(page).to have_content(flash[:alert] = "Please enter a valid username/email and ensure passwords are matching")
+    expect(page).to have_content("Please enter a valid username/email and ensure passwords are matching")
   end
 end
