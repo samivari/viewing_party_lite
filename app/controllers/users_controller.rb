@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       flash[:notice] = 'Account Successfully Created'
     else
       redirect_to "/register"
-      flash[:alert] = "Please enter a valid username/email"
+      flash[:alert] = "Please enter a valid username/email and ensure passwords are matching"
     end
   end
 

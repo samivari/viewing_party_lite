@@ -6,9 +6,11 @@ RSpec.describe 'User Registration' do
     visit "/register"
     fill_in 'Name', with: "Test Guy"
     fill_in 'Email', with: "Tguy@gmail.com"
+    fill_in 'Password', with: 'password123'
+    fill_in 'Password confirmation', with: 'password123'
     click_on 'Register'
 
-    test_user = User.first
+    test_user = User.last
 
     expect(current_path).to eq("/users/#{test_user.id}")
     expect(page).to have_content("Account Successfully Created")
@@ -24,6 +26,19 @@ RSpec.describe 'User Registration' do
     click_on 'Register'
 
     expect(current_path).to eq("/register")
-    expect(page).to have_content("Please enter a valid username/email")
+    expect(page).to have_content(flash[:alert] = "Please enter a valid username/email and ensure passwords are matching")
+  end
+
+  it 'wont register a user with non matching passwords ' do
+    visit "/register"
+
+    fill_in 'Email', with: 'User@email.com'
+    fill_in 'Name', with: 'User Name'
+    fill_in 'Password', with: '1234'
+    fill_in 'Password confirmation', with: '12345'
+
+    click_on 'Register'
+
+    expect(page).to have_content(flash[:alert] = "Please enter a valid username/email and ensure passwords are matching")
   end
 end
